@@ -3,13 +3,6 @@ title: "Inferential Statistics: Probability & Distributions - 1"
 output: html_notebook
 ---
 
-
-You: made a change
-I: added a new command
-You: want to sync the new command
-
-### Follow this carefully
-
 So far we have discussed about descriptive statistics - summarizing data and plotting it. But in order gain the power of making inferences, we will be strating with inferential statistics.
 
 #### Pre-requisite: Probability
@@ -19,21 +12,6 @@ Probability theory is a branch of mathematics that tells you how often different
 
 In each case the “truth of the world” is known. We know that the coin is fair, so there’s a 50% chance that any individual coin flip will come up heads. We know that the lottery follows specific rules. The critical point is that probabilistic questions start with a known model of the world, and we use that model to do some calculations. *[Chapter 9, Navarro D.]*
 
-Probability of heads when you toss a coin? 
-P(H) = 0.5 
-
-Frequentist view is also an objective view. 
-Coin - [H, T, H, T, H, T, H]
-Prob - [1, 1/2, 2/3, 0.5, ... ]
-
-
-
-
-
-Coin - [1, 1, 1, 1, 0]
-P'(H) - 0.7
-
-- - - -
 **A short note on Models**
 
 A model is a simplified representation of a system. For example, the map of a city represents a city in a simplified fashion. A map providing as much detail as the original city would not only be impossible to construct, it would also be pointless. Humans build models, such as maps and statistical models, to make their lives simpler. *[Chapter 3, Winter B.]*
@@ -165,7 +143,7 @@ qbinom( p = 0.566, size = 20, prob = 1/6 )
 We've found different quantities. What if we want to simulate the above experiments. We specify how many times R should “simulate” the experiment using the n argument, and it will generate random outcomes from the binomial distribution using the `rbinom` function.
 
 ```{r}
-z <- rbinom( n = 100, size = 20, prob = 1/6 )
+z <- rbinom( n = 10000, size = 20, prob = 2/6 )
 z
 #Let's also plot this and see how it looks
 hist(z, col = 'steelblue')
@@ -183,11 +161,18 @@ Eg: heights of all students in the class, marks obtained in exams, etc
 Basically, whenever you have accumulation of data at the center, fewer extreme values and a near symmetric spread, you should recall the normal distribution.
 
 
+- `dnorm()` - For probability density
+- `pnorm()` - For cumulative probability
+- `qnorm()` - For quantile of
+- `rnorm()` - For random number generation
 
+
+mean = 0; sd = 1 -> standard normal distribution
 ```{r}
 normal_distribution <- rnorm(10000, mean = 0, sd = 1) 
 histogram_normal_distribution <- hist(normal_distribution)
-plot(histogram_normal_distribution$mids,histogram_normal_distribution$density)
+plot(histogram_normal_distribution$mids,histogram_normal_distribution$density, type="l", col="blue", lwd=3)
+
 
 ```
 
@@ -198,17 +183,31 @@ The notation for a normal distribution is: X ∼ Normal(μ,σ)
 
 dnorm tells you the probability of getting a particular outcome
 ```{r}
-dnorm(x=0, mean=0, sd=1)
+dnorm(x=85, mean=80, sd=5)
 
 ```
 Cumulative normal distribution
 ```{r}
-pnorm(2, mean = 0, sd = 1)
+pnorm(q = 80, mean = 80, sd = 5)
 ```
 
 ```{r}
-qnorm(0.5 ,mean = , sd = 1)
+qnorm(0.25 ,mean = 0 , sd = 1)
 ```
+
+*Checking for normality using the Shapiro-Wilk Test*
+```{r}
+norm <- rnorm(50, mean = 0, sd = 1) 
+shapiro.test(norm)
+
+binom <- rbinom(100, 20, 1/6)
+shapiro.test(binom)
+
+```
+
+
+
+
 
 ##### Other useful distributions
 
@@ -224,7 +223,7 @@ dt(), pt(), qt() and rt()
 ```{r}
 t_distribution <- rt(10000, 3)
 histogram_t_distribution <- hist(t_distribution)
-plot(histogram_t_distribution$mids,histogram_t_distribution$density)
+plot(histogram_t_distribution$mids,histogram_t_distribution$density, type="l", col="blue", lwd=3)
 ```
 
 
@@ -239,9 +238,14 @@ Use the following functions to visualize the chi sq distribution:
 dchisq(), pchisq(), qchisq(), rchisq().
 
 ```{r}
-chisq_distribution <- rchisq(10000, 3, ncp = 0)
+
+norm1 <- rnorm(100, mean = 10, sd = 5)
+norm2 <- rnorm(100, mean = 20, sd = 7)
+chisqdist <- norm1^2 + norm2^2
+
+chisq_distribution <- rchisq(10000, 3)
 histogram_chisq_distribution <- hist(chisq_distribution)
-plot(histogram_chisq_distribution$mids,histogram_chisq_distribution$density)
+plot(histogram_chisq_distribution$mids,histogram_chisq_distribution$density, type="l", col="blue", lwd=3)
 ```
 
 
@@ -249,16 +253,16 @@ plot(histogram_chisq_distribution$mids,histogram_chisq_distribution$density)
 
 3) F distribution
 
-This one looka a bit like the chi square distribution. But this distribution comes into picture when 
+This one looks a bit like the chi square distribution. But this distribution comes into picture when 
 one compares two chi sq distributions.
 
 Use the following functions to visualize the chi sq distribution: 
 df(), pf(), qf() and rf()
 
 ```{r}
-f_distribution <- rf(10000, 3, 5)
+f_distribution <- rf(10000, 5, 10)
 histogram_f_distribution <- hist(f_distribution)
-plot(histogram_f_distribution$mids,histogram_f_distribution$density)
+plot(histogram_f_distribution$mids,histogram_f_distribution$density, type="l", col="blue", lwd=3)
 ```
 
 
