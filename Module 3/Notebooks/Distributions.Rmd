@@ -104,6 +104,7 @@ Probability distribution is simply the probabilities of these different events a
 
 ```{r}
 #Try plotting a bar graph of all the probabilities above
+#barplot(pants$probability, names.arg = pants$type)
 ```
 Let's think about what happens in case of non-elementary events. E.g. An event E where either “blue jeans” or “black jeans” or “grey jeans" has occurred. 
 Then what will be the probability of event E.
@@ -122,14 +123,14 @@ Some basic terminology - We’ll let `N` denote the number of dice rolls in our 
 
 `X ~ Binomial(θ, N)` denotes X is generated randomly from a binomial distribution with parameters θ and N.
 
-4 ~ Binomial(1/6, 20)
+4 ~ Binomial(1/6, 20) # i get 4 times skull in 20 dieces throw
 
 5 ~ Binomial(1/2, 10)
 
 Let's generate a binomial distribution in R:
 
 ```{r}
-dbinom( x = 1, size = 20, prob = 1/6)
+dbinom( x = 4, size = 20, prob = 1/6)
 ```
 The above command calculates the probability of getting x = 4 skulls, from an experiment of size = 20 trials, in which the probability of getting a skull on any one trial is prob = 1/6.
 
@@ -137,6 +138,8 @@ What if the dice is replaced by a coin in the above example? How will the probab
 
 ```{r}
 #Try finding the probability for N = 20 and N=100 trials for a fair coin flip.
+#dbinom(x=3, size= 20, prob=1/2)
+#dbinom (x=3,size= 100, prob= 1/2)
 ```
 There are different functions in R for different distributions as well as different ones for finding different quantity of interest.
 
@@ -147,6 +150,7 @@ If we want to find the probability of obtaining an outcome smaller than or equal
 pbinom( q= 3, size = 20, prob = 1/6)
 
 #Practice - Find probability of getting 0-5 heads in 50 trials of coin flip
+#pbinom(q=5, size=50,prob=1/2)
 ```
 In other words, value of 4 is actually the 76.9th percentile of this binomial distribution.
 

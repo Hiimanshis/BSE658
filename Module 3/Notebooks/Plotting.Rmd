@@ -66,6 +66,7 @@ ylab = "The y-axis label is ’ylab’" )
 
 But what about the fonts? What if we want to change the font of the labels and title?
 
+
 ```{r}
 plot( x = Fibonacci,                     # the data to plot
 main = "The first 7 Fibonacci numbers",  # the title
@@ -110,6 +111,7 @@ For a categorical variable, you can first display the the number of occurrences 
 #In order to plot the finalists by their frequency, let's find their frequencies
 freq <- tabulate( afl.finalists )
 print( freq )
+
 #Now we will create some labels for each team:
 teams <- levels( afl.finalists ) #If this is unclear, check the class of afl.finalists; Note that it is a factor variable
 print( teams )
@@ -119,6 +121,10 @@ barplot( freq )   # the lazier version
 #But wait, where are the team labels we had saved in teams?
 barplot( height = freq, names.arg = teams ) #Adding labels to the bar plot
 ```
+```{r}
+class(afl.finalists)
+```
+
 ```{r}
 #But a lot of our labels are missing in the plot. let's rotate them to fit all of the labels
 barplot( height = freq,      # the frequencies
@@ -289,6 +295,7 @@ Each observation in the data is represented as a point.
 
 ```{r}
 #For this let's go back to our parenthood dataset and try out the scatter plots again
+load("parenthood.Rdata")
 plot( x = parenthood$dan.sleep, # data on the x-axis 
       y = parenthood$dan.grump) # data on the y-axis
 ```
@@ -363,7 +370,7 @@ which( afl.margins > 300 )
 ```{r}
 #Let's load the aflsmall2 dataset for trying out multiple box plots
 afl2 <- load( "aflsmall2.Rdata" )
-who( TRUE )
+who()
 head(afl2)
 ```
 ```{r}
