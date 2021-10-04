@@ -242,10 +242,10 @@ dchisq(), pchisq(), qchisq(), rchisq().
 norm1 <- rnorm(100, mean = 10, sd = 5)
 norm2 <- rnorm(100, mean = 20, sd = 7)
 chisqdist <- norm1^2 + norm2^2
-
-chisq_distribution <- rchisq(10000, 3)
-histogram_chisq_distribution <- hist(chisq_distribution)
-plot(histogram_chisq_distribution$mids,histogram_chisq_distribution$density, type="l", col="blue", lwd=3)
+chisqdist
+#chisq_distribution <- rchisq(10000, 3)
+#histogram_chisq_distribution <- hist(chisq_distribution)
+#plot(histogram_chisq_distribution$mids,histogram_chisq_distribution$density, type="l", col="blue", lwd=3)
 ```
 
 
