@@ -315,7 +315,7 @@ library(lsr)
 
 
 ```{r}
-#load('afl24.Rdata')
+load('afl24.Rdata')
 ciMean( x = afl$attendance, conf = 0.95 ) #Calculating confidence interval using ciMean function from lsr package
 ```
 
